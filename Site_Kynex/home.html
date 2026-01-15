@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kynex | Em breve</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="logo-wrap">
+      <a href="index.html">
+        <img src="../logokynex.png" alt="Logotipo Kynex" class="logo" />
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#about">Sobre</a>
+      <a href="#contact">Contacto</a>
+    </div>
+    <div class="nav-actions">
+    </div>
+  </header>
+
+  <main>
+    <section class="hero coming-soon" id="home">
+      <div class="bg-animation">
+        <div class="energy-pulse"></div>
+        <div class="energy-pulse" style="animation-delay: 1s;"></div>
+        <div class="energy-pulse" style="animation-delay: 2s;"></div>
+      </div>
+      <div class="hero-copy">
+        <div class="hero-logo">
+          <img src="../kynexpulse.png" alt="Kynex Pulse" class="hero-logo-img" />
+        </div>
+        <div class="hero-message">
+          <img src="../mensagem.png" alt="Da invisibilidade do consumo à inteligência da poupança" class="hero-message-img" />
+        </div>
+      </div>
+      <div class="app-showcase">
+        <div class="showcase-wrapper">
+          <div class="phones-container">
+            <!-- Modo Dia -->
+            <div class="mode-display active" data-mode="day">
+              <div class="phone-mockup phone-light">
+                <img src="../dia inicial.png" alt="Interface Kynex - Dia (Casa)" />
+              </div>
+              <div class="phone-mockup phone-dark">
+                <img src="../dia grafico.png" alt="Interface Kynex - Dia (Gráfico)" />
+              </div>
+            </div>
+            <!-- Modo Noite -->
+            <div class="mode-display" data-mode="night">
+              <div class="phone-mockup phone-light">
+                <img src="../noite inicial.png" alt="Interface Kynex - Noite (Casa)" />
+              </div>
+              <div class="phone-mockup phone-dark">
+                <img src="../noite grafico.png" alt="Interface Kynex - Noite (Gráfico)" />
+              </div>
+            </div>
+          </div>
+          <div class="toggle-switch">
+            <button class="toggle-btn day-btn active" data-mode="day" aria-label="Modo dia">
+              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="currentColor"/>
+                <path d="M12 1v2m0 18v2M23 12h-2M3 12H1m17.66-7.66l-1.42 1.42M6.76 17.24l-1.42 1.42m12.9 0l-1.42-1.42M6.76 6.76L5.34 5.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button class="toggle-btn night-btn" data-mode="night" aria-label="Modo noite">
+              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter-section" id="newsletter">
+      <div class="newsletter-content">
+        <p class="newsletter-subtitle">Seja o primeiro a usar</p>
+        <form class="newsletter-form" id="newsletter">
+          <input 
+            type="email" 
+            placeholder="Insira o seu email para receber notificações" 
+            required 
+            aria-label="Insira o seu email para receber notificações"
+          />
+          <button type="submit" class="btn solid">Notifique-me</button>
+        </form>
+        <p class="newsletter-note">Será notificado quando a Kynex Pulse estiver pronta. Sem spam e sem compromisso.</p>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="about-content">
+        <h2>O que é Kynex?</h2>
+        <p>Kynex Pulse transforma a sua energia em decisões claras. Com uma aplicação simples, vê euros em tempo real, recebe alertas críticos e descobre onde poupar.</p>
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Clareza em euros</h3>
+            <p>Custo a cada segundo. Sem jargão técnico, apenas números que fazem sentido.</p>
+          </div>
+          <div class="about-card">
+            <h3>Protecção ativa</h3>
+            <p>Alertas imediatos quando algo está errado ou anómalo.</p>
+          </div>
+          <div class="about-card">
+            <h3>Poupa até 25%</h3>
+            <p>Identifica exactamente o que consome mais energia e onde cortar desperdício. Resultados reais em poucos meses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <h2>Pronto para avançar?</h2>
+      <p>Quer saber mais? Entre em contacto com a equipa Kynex.</p>
+      <div class="contact-ctas">
+        <a href="mailto:kynexpt.contact@gmail.com" class="btn solid">kynexpt.contact@gmail.com</a>
+        <a href="https://linktr.ee/kynexpt" target="_blank" rel="noopener noreferrer" class="btn ghost">Todas as redes</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-left">
+      <p class="footer-copyright">© Copyright 2026 - Kynex. Todos os direitos reservados.</p>
+    </div>
+    <div class="footer-center">
+      <a href="#">Política de Cookies</a>
+      <span class="separator">|</span>
+      <a href="#">Política de Privacidade</a>
+      <span class="separator">|</span>
+      <a href="#">Termos e Condições</a>
+      <span class="separator">|</span>
+      <a href="#">Proteção de Dados</a>
+      <span class="separator">|</span>
+      <a href="#">Definições de cookies</a>
+      <span class="separator">|</span>
+      <a href="#">Livro de reclamações</a>
+      <span class="separator">|</span>
+      <a href="#">Provedor do cliente</a>
+    </div>
+    <div class="footer-right">
+      <a href="https://linktr.ee/kynexpt" target="_blank" rel="noopener noreferrer" title="Redes Sociais">🔗</a>
+      <a href="https://linkedin.com/company/kynex" target="_blank" rel="noopener noreferrer" title="LinkedIn">in</a>
+      <a href="https://youtube.com/@kynex" target="_blank" rel="noopener noreferrer" title="YouTube">▶</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
