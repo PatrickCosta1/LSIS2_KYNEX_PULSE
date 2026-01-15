@@ -1,30 +1,55 @@
 (() => {
-  const toggle = document.querySelector('.mode-toggle');
-  const btns = document.querySelectorAll('[data-scroll]');
-  const root = document.documentElement;
-
-  const setMode = (mode) => {
-    root.setAttribute('data-theme', mode);
-    localStorage.setItem('kynex-theme', mode);
-    toggle.textContent = mode === 'light' ? '☾' : '☼';
-  };
-
-  const saved = localStorage.getItem('kynex-theme');
-  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-  setMode(saved || (prefersLight ? 'light' : 'dark'));
-
-  toggle.addEventListener('click', () => {
-    const current = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    setMode(current);
-  });
-
-  btns.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      const target = document.querySelector(btn.dataset.scroll);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+  // App Mode Toggle
+  const modeBtns = document.querySelectorAll('.mode-btn');
+  const modeDisplays = document.querySelectorAll('.mode-display');
+  
+  if (modeBtns.length > 0) {
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-mode');
+        
+        // Remover active de todos os botões
+        modeBtns.forEach(b => b.classList.remove('active'));
+        // Adicionar active ao botão clicado
+        btn.classList.add('active');
+        
+        // Remover active de todos os displays
+        modeDisplays.forEach(display => display.classList.remove('active'));
+        // Adicionar active ao display correspondente
+        document.querySelector(`.mode-display[data-mode="${mode}"]`).classList.add('active');
+        
+        // Guardar preferência
+        localStorage.setItem('app-mode', mode);
+      });
     });
-  });
+    
+    // Carregar modo guardado
+    const savedMode = localStorage.getItem('app-mode') || 'day';
+    document.querySelector(`.mode-btn[data-mode="${savedMode}"]`).click();
+  }
+
+  // Newsletter
+  const newsletter = document.getElementById('newsletter');
+  if (newsletter) {
+    newsletter.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = newsletter.querySelector('input[type="email"]').value;
+      
+      // Simular envio (em produção, enviar para servidor)
+      console.log('Email registado:', email);
+      
+      // Feedback ao utilizador
+      const btn = newsletter.querySelector('button');
+      const originalText = btn.textContent;
+      btn.textContent = '✓ Registado!';
+      btn.disabled = true;
+      
+      // Limpar após 2 segundos
+      setTimeout(() => {
+        newsletter.reset();
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }, 2000);
+    });
+  }
 })();
