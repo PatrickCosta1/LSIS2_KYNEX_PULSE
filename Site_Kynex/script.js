@@ -1,4 +1,20 @@
 (() => {
+  // Discover Button - Show Hidden Content
+  const discoverBtn = document.getElementById('discoverBtn');
+  const fullContent = document.getElementById('fullContent');
+  const newsletterSection = document.getElementById('newsletterSection');
+  const aboutSection = document.getElementById('aboutSection');
+  
+  if (discoverBtn) {
+    discoverBtn.addEventListener('click', () => {
+      fullContent.classList.remove('hidden');
+      newsletterSection.classList.remove('hidden');
+      aboutSection.classList.remove('hidden');
+      discoverBtn.style.display = 'none';
+      document.querySelector('.mystery-text').style.display = 'none';
+    });
+  }
+
   // App Mode Toggle - Updated for toggle-btn
   const modeBtns = document.querySelectorAll('.toggle-btn');
   const modeDisplays = document.querySelectorAll('.mode-display');
@@ -29,7 +45,7 @@
   }
 
   // Newsletter
-  const newsletter = document.getElementById('newsletter');
+  const newsletter = document.querySelector('.newsletter-form');
   if (newsletter) {
     newsletter.addEventListener('submit', (e) => {
       e.preventDefault();

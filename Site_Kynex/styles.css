@@ -843,6 +843,45 @@ main {
   z-index: 2;
 }
 
+.mystery-content {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.mystery-text {
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.discover-btn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  border-radius: 12px;
+  color: #0f1115;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 212, 170, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.discover-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 212, 170, 0.5);
+}
+
+.hidden {
+  display: none !important;
+}
+
 /* App Showcase */
 .app-showcase {
   position: relative;
