@@ -39,28 +39,30 @@
         <p class="hero-tagline">Da invisibilidade do consumo à <span class="tagline-highlight">inteligência da poupança</span></p>
       </div>
       <div class="app-showcase">
-        <div class="showcase-controls">
-          <button class="mode-btn active" data-mode="day">☀️ Dia</button>
-          <button class="mode-btn" data-mode="night">🌙 Noite</button>
-        </div>
-        <div class="phones-container">
-          <!-- Modo Dia -->
-          <div class="mode-display active" data-mode="day">
-            <div class="phone-mockup phone-light">
-              <img src="../dia inicial.png" alt="Interface Kynex - Dia (Casa)" />
+        <div class="showcase-wrapper">
+          <div class="phones-container">
+            <!-- Modo Dia -->
+            <div class="mode-display active" data-mode="day">
+              <div class="phone-mockup phone-light">
+                <img src="../dia inicial.png" alt="Interface Kynex - Dia (Casa)" />
+              </div>
+              <div class="phone-mockup phone-dark">
+                <img src="../dia grafico.png" alt="Interface Kynex - Dia (Gráfico)" />
+              </div>
             </div>
-            <div class="phone-mockup phone-dark">
-              <img src="../dia grafico.png" alt="Interface Kynex - Dia (Gráfico)" />
+            <!-- Modo Noite -->
+            <div class="mode-display" data-mode="night">
+              <div class="phone-mockup phone-light">
+                <img src="../noite inicial.png" alt="Interface Kynex - Noite (Casa)" />
+              </div>
+              <div class="phone-mockup phone-dark">
+                <img src="../noite grafico.png" alt="Interface Kynex - Noite (Gráfico)" />
+              </div>
             </div>
           </div>
-          <!-- Modo Noite -->
-          <div class="mode-display" data-mode="night">
-            <div class="phone-mockup phone-light">
-              <img src="../noite inicial.png" alt="Interface Kynex - Noite (Casa)" />
-            </div>
-            <div class="phone-mockup phone-dark">
-              <img src="../noite grafico.png" alt="Interface Kynex - Noite (Gráfico)" />
-            </div>
+          <div class="toggle-switch">
+            <button class="toggle-btn day-btn active" data-mode="day">Dia</button>
+            <button class="toggle-btn night-btn" data-mode="night">Noite</button>
           </div>
         </div>
       </div>
@@ -72,13 +74,13 @@
         <form class="newsletter-form" id="newsletter">
           <input 
             type="email" 
-            placeholder="Deixe o seu email para receber aviso quando lançarmos" 
+            placeholder="Insira o seu email para receber notificações" 
             required 
             aria-label="Insira o seu email para receber notificações"
           />
           <button type="submit" class="btn solid">Notifique-me</button>
         </form>
-        <p class="newsletter-note">Será notificado quando Kynex Pulse estiver pronto. Sem spam, promessa.</p>
+        <p class="newsletter-note">Será notificado quando a Kynex Pulse estiver pronta. Sem spam e sem compromisso.</p>
       </div>
     </section>
 

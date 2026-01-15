@@ -1,6 +1,6 @@
 (() => {
-  // App Mode Toggle
-  const modeBtns = document.querySelectorAll('.mode-btn');
+  // App Mode Toggle - Updated for toggle-btn
+  const modeBtns = document.querySelectorAll('.toggle-btn');
   const modeDisplays = document.querySelectorAll('.mode-display');
   
   if (modeBtns.length > 0) {
@@ -25,7 +25,7 @@
     
     // Carregar modo guardado
     const savedMode = localStorage.getItem('app-mode') || 'day';
-    document.querySelector(`.mode-btn[data-mode="${savedMode}"]`).click();
+    document.querySelector(`.toggle-btn[data-mode="${savedMode}"]`).click();
   }
 
   // Newsletter
