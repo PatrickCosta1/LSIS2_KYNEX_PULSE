@@ -1,4 +1,3 @@
-db.serialize(() => {
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -43,6 +42,4 @@ app.get('/emails', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
-
 });
