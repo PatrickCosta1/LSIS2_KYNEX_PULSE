@@ -1,3 +1,68 @@
+/* Popup de sucesso para Netlify Forms */
+.success-popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+}
+/* Modal de sucesso bonito */
+.success-popup-content {
+  background: var(--bg-soft, #1a2332);
+  color: var(--text, #fff);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  text-align: center;
+  position: relative;
+  min-width: 320px;
+  animation: popup-fade-in 0.3s cubic-bezier(.4,2,.6,1) both;
+}
+.success-icon {
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.success-icon svg {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 8px #00d4aa55);
+}
+.success-popup-content h2 {
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: 2rem;
+  color: var(--primary, #00d4aa);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.success-popup-content p {
+  color: var(--muted, #a0b0c0);
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+.close-success-popup {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 2rem;
+  color: var(--primary, #00d4aa);
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.close-success-popup:hover {
+  color: #fff;
+}
+@keyframes popup-fade-in {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
 :root {
   --bg: #0a1420;
   --bg-soft: #0f1f32;

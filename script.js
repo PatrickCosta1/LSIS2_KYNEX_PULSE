@@ -45,5 +45,31 @@
     });
   }
 
-  // Newsletter removido: agora o envio é feito diretamente pelo Netlify Forms
+  // Newsletter Netlify Forms com popup de sucesso (funciona em ambas as páginas)
+  const newsletterForm = document.querySelector('form[name="newsletter"]');
+  const successPopup = document.getElementById('success-popup');
+  const closePopup = document.getElementById('close-success-popup');
+  if (newsletterForm && successPopup) {
+    newsletterForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(newsletterForm);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => {
+        newsletterForm.reset();
+        successPopup.style.display = 'flex';
+      })
+      .catch(() => {
+        alert('Erro ao registar o email.');
+      });
+    });
+  }
+  if (closePopup && successPopup) {
+    closePopup.addEventListener('click', () => {
+      successPopup.style.display = 'none';
+    });
+  }
 })();
