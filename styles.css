@@ -2121,3 +2121,219 @@ main {
 .contact-ctas .btn {
   font-size: 14px;
 }
+
+/* =========================
+   MOBILE FIX (CRÍTICO)
+   ========================= */
+@media (max-width: 768px) {
+
+  /* 1️⃣ Desligar elementos desktop-only */
+  .mouse-cursor,
+  .cursor-1,
+  .cursor-2,
+  .cursor-3 {
+    display: none !important;
+  }
+
+  /* 2️⃣ Logo centralizado sem absolute */
+  .logo-clickable {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 0 auto 20px;
+    width: 90px;
+    height: 90px;
+  }
+
+  /* 3️⃣ Formulário deixa de ser absolute */
+  .coming-soon-form {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    flex-direction: column;
+    width: 100%;
+    max-width: 340px;
+    margin: 24px auto 0;
+  }
+
+  .email-input,
+  .notify-btn {
+    width: 100%;
+  }
+
+  /* 4️⃣ Social icons normais */
+  .social-icons {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 24px;
+    justify-content: center;
+  }
+
+  /* 5️⃣ HERO — tipografia adaptada */
+  .hero-title h1 {
+    font-size: clamp(72px, 22vw, 140px);
+    letter-spacing: 10px;
+    line-height: 0.9;
+    text-align: center;
+  }
+
+  .title-kynex,
+  .title-pulse {
+    font-size: clamp(56px, 18vw, 120px);
+    letter-spacing: 8px;
+    text-align: center;
+  }
+
+  /* 6️⃣ Tagline alinhada */
+  .hero-tagline {
+    text-align: center;
+    align-self: center;
+    margin-top: 16px;
+  }
+
+  /* 7️⃣ Background fix (iOS) */
+  body.landing-page {
+    background-attachment: scroll;
+  }
+}
+/* ===============================
+   MOBILE OVERRIDE FORÇADO
+   =============================== */
+@media (max-width: 768px) {
+
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .logo-clickable,
+  .coming-soon-form,
+  .social-icons {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .logo-clickable {
+    width: 90px !important;
+    height: 90px !important;
+    margin-top: 24px !important;
+  }
+
+  .coming-soon-form {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 90% !important;
+    max-width: 340px !important;
+    margin-top: 32px !important;
+  }
+
+  .email-input,
+  .notify-btn {
+    width: 100% !important;
+  }
+
+  .social-icons {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    margin-top: 28px !important;
+  }
+
+  .mouse-cursor {
+    display: none !important;
+  }
+
+  /* Tipografia */
+  .hero-title h1,
+  .title-kynex,
+  .title-pulse {
+    font-size: 22vw !important;
+    letter-spacing: 6px !important;
+    line-height: 1 !important;
+    text-align: center !important;
+  }
+}
+/* =====================================
+   MOBILE RESET TOTAL (FORÇADO)
+   ===================================== */
+@media (max-width: 768px) {
+
+  /* RESET DE LAYOUT */
+  body,
+  body * {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 24px 16px !important;
+  }
+
+  /* LOGO */
+  .logo-clickable {
+    width: 90px !important;
+    height: 90px !important;
+    margin-bottom: 24px !important;
+  }
+
+  /* FORM */
+  .coming-soon-form {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    gap: 12px !important;
+  }
+
+  .email-input,
+  .notify-btn {
+    width: 100% !important;
+  }
+
+  /* SOCIAL */
+  .social-icons {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    margin-top: 28px !important;
+  }
+
+  /* DESKTOP-ONLY */
+  .mouse-cursor {
+    display: none !important;
+  }
+
+  /* TEXTO GIGANTE */
+  .hero-title h1,
+  .title-kynex,
+  .title-pulse {
+    font-size: 22vw !important;
+    letter-spacing: 6px !important;
+    line-height: 1 !important;
+    text-align: center !important;
+  }
+}
