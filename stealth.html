@@ -1812,29 +1812,20 @@
         e.preventDefault();
         return;
       }
-
-      // Envio AJAX para Netlify Forms
-      e.preventDefault();
-      const formData = new FormData(form);
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
-      })
-      .then(() => {
+      // Permite envio padrão para Netlify Forms
+      // Exibe popup de sucesso após submit (apenas se não houver redirecionamento)
+      setTimeout(function() {
         const popup = document.getElementById('popupOverlay');
         popup.style.display = 'flex';
         form.reset();
         updateBatteryLevel();
-        // Atribui evento ao botão de fechar sempre que o popup aparece
         const closeBtn = document.getElementById('closePopupBtn');
         if (closeBtn) {
           closeBtn.onclick = function() {
             popup.style.display = 'none';
           };
         }
-      })
-      .catch(() => alert('Ocorreu um erro ao enviar. Tente novamente.'));
+      }, 1000);
     });
 
     // Fechar popup
