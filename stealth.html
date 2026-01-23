@@ -1308,6 +1308,14 @@
   </style>
 </head>
 <body>
+    <script>
+      // Verifica se o token está presente na URL
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      if (token !== 'KYNEX2026') {
+        window.location.href = '/home.html'; // Redireciona para a página principal
+      }
+    </script>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
     <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="12" cy="12" r="5"/>
