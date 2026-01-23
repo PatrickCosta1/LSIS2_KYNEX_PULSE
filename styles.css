@@ -109,6 +109,12 @@ body.landing-page::after {
   background: none;
 }
 
+/* Esconder texto Coming Soon no desktop */
+.coming-soon-text-mobile,
+.coming-soon-subtitle-mobile {
+  display: none;
+}
+
 .landing-overlay {
   position: fixed;
   inset: 0;
@@ -2281,9 +2287,43 @@ main {
     justify-content: center !important;
     padding: 40px 24px !important;
     min-height: 100vh !important;
-    background-size: cover !important;
+    height: 100vh !important;
+    background-color: #181818 !important;
+    background-image:
+      radial-gradient(ellipse at center, rgba(24,24,24,0) 60%, #181818 100%),
+      linear-gradient(135deg, #355343 0%, #106e39 100%) !important;
+    background-blend-mode: normal, overlay !important;
+    background-size: 180% !important;
+    background-repeat: no-repeat !important;
     background-position: center center !important;
     background-attachment: scroll !important;
+  }
+
+  /* Esconder imagem de fundo, mostrar texto Coming Soon */
+  .coming-soon-text-mobile {
+    display: block !important;
+    position: relative !important;
+    z-index: 10 !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    text-align: center !important;
+    margin: 0 auto 12px auto !important;
+    letter-spacing: 1px !important;
+    width: 100% !important;
+  }
+
+  .coming-soon-subtitle-mobile {
+    display: block !important;
+    position: relative !important;
+    z-index: 10 !important;
+    font-size: 14px !important;
+    color: rgba(255,255,255,0.7) !important;
+    text-align: center !important;
+    margin: 0 auto 32px auto !important;
+    max-width: 300px !important;
+    line-height: 1.5 !important;
+    width: 100% !important;
   }
 
   /* Esconder elementos de texto sobrepostos */
@@ -2303,7 +2343,7 @@ main {
     transform: none !important;
     width: 100px !important;
     height: 100px !important;
-    margin: 0 auto 48px auto !important;
+    margin: 0 auto 72px auto !important;
     display: block !important;
     margin-top: 0 !important;
   }
