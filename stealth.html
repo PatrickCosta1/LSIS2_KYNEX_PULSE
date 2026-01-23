@@ -1616,14 +1616,19 @@
 
       <!-- Success Message -->
       <div class="success-message" id="successMessage">
-        <div class="success-icon">
-          <svg viewBox="0 0 24 24" fill="none">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
+        <div class="popup-overlay" id="popupOverlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:9999;justify-content:center;align-items:center;">
+          <div class="popup-success" style="background:var(--white);border-radius:18px;box-shadow:var(--shadow-hover);padding:40px 32px;max-width:340px;text-align:center;position:relative;">
+            <div style="margin-bottom:18px;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="display:inline-block;">
+                <circle cx="12" cy="12" r="12" fill="var(--success-green)"/>
+                <polyline points="17 8 11 16 7 12" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2 style="color:var(--success-green);font-size:1.5rem;margin-bottom:10px;">Obrigado!</h2>
+            <p style="color:var(--text-primary);font-size:1rem;margin-bottom:18px;">Os seus dados foram registados com sucesso.<br>Em breve receberá novidades da Kynex Pulse!</p>
+            <button id="closePopupBtn" style="background:var(--accent-blue);color:white;border:none;border-radius:8px;padding:10px 24px;font-size:1rem;cursor:pointer;box-shadow:var(--shadow-soft);transition:background 0.2s;">Fechar</button>
+          </div>
         </div>
-        <h2>Obrigado!</h2>
-        <p>Os seus dados foram registados com sucesso. Será um dos primeiros a receber o acesso à versão Beta da Kynex Pulse.</p>
-      </div>
     </div>
   </main>
 
@@ -1807,9 +1812,33 @@
         e.preventDefault();
         return;
       }
-      // Permite o envio padrão do formulário para Netlify
-      // Mensagem de sucesso será exibida após o redirecionamento do Netlify ou pode ser customizada via Netlify config
+
+      // Envio AJAX para Netlify Forms
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => {
+        document.getElementById('popupOverlay').style.display = 'flex';
+        form.reset();
+        updateBatteryLevel();
+      })
+      .catch(() => alert('Ocorreu um erro ao enviar. Tente novamente.'));
     });
+
+    // Fechar popup
+    document.addEventListener('DOMContentLoaded', function() {
+      const closeBtn = document.getElementById('closePopupBtn');
+      if (closeBtn) {
+        closeBtn.onclick = function() {
+          document.getElementById('popupOverlay').style.display = 'none';
+        };
+      }
+    });
+
   </script>
 </body>
 </html>
