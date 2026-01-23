@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obrigado pela sua resposta!</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #F5F5F7 0%, #E8E8EA 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Inter", "Roboto", "Helvetica Neue", sans-serif;
+      color: #1D1D1F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .popup-success {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 40px 32px;
+      max-width: 340px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.7s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .popup-success svg {
+      margin-bottom: 18px;
+    }
+    .popup-success h2 {
+      color: #34C759;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .popup-success p {
+      color: #1D1D1F;
+      font-size: 1rem;
+      margin-bottom: 18px;
+    }
+    .popup-success a {
+      background: #0071E3;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      text-decoration: none;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .popup-success a:hover {
+      background: #0077ED;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-success">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="12" fill="#34C759"/>
+      <polyline points="17 8 11 16 7 12" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2>Obrigado!</h2>
+    <p>Os seus dados foram registados com sucesso.<br>Em breve receberá novidades da Kynex Pulse!</p>
+    <a href="/stealth.html">Voltar ao site</a>
+  </div>
+</body>
+</html>
