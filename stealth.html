@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -392,6 +393,7 @@
       text-align: left;
       margin: 0;
       transition: color 0.3s ease;
+      padding: 7px;
     }
 
     .info-box p strong {
@@ -1273,6 +1275,7 @@
 
       .question-label {
         font-size: 14px;
+        padding: 7px;
       }
 
       .radio-label,
@@ -1305,6 +1308,121 @@
         padding: 14px 24px;
       }
     }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 12px;
+        max-width: 100vw;
+      }
+      .form-wrapper, .info-box {
+        margin-left: 6px;
+        margin-right: 6px;
+      }
+      .hero {
+        padding: 120px 0 30px;
+      }
+      .hero-title-wrapper {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        font-size: 22px;
+        max-width: 98vw;
+        padding: 0 2px;
+      }
+      .info-box {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 4px 40px;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      }
+      .info-text {
+        max-width: 100vw;
+        font-size: 14px;
+      }
+      .app-preview {
+        width: 100%;
+        height: auto;
+        margin: 0 auto 12px auto;
+      }
+      .app-preview img {
+        border-radius: 10px;
+      }
+      .form-wrapper {
+        padding: 18px 4px;
+        margin: 18px 0 40px;
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+      .question-block {
+        margin-bottom: 22px;
+      }
+      .question-label {
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      .radio-label, .checkbox-label {
+        font-size: 13px;
+      }
+      .radio-option, .checkbox-option {
+        padding: 10px 8px;
+        border-radius: 8px;
+      }
+      .email-block {
+        gap: 10px;
+      }
+      .email-input {
+        padding: 12px 10px;
+        font-size: 15px;
+        border-radius: 8px;
+      }
+      .battery-container {
+        flex-direction: row;
+        gap: 8px;
+        padding: 8px 0;
+      }
+      .battery-wrapper {
+        width: 40px;
+        height: 70px;
+      }
+      .battery-label {
+        font-size: 10px;
+        max-width: 60px;
+      }
+      .cta-button {
+        font-size: 15px;
+        padding: 12px 10px;
+        border-radius: 8px;
+      }
+      .formulario-btn, .ver-mais-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 6px;
+      }
+      .success-message {
+        padding: 30px 8px;
+      }
+      .success-message h2 {
+        font-size: 20px;
+      }
+      .success-message p {
+        font-size: 14px;
+      }
+      footer {
+        padding: 20px 0 30px;
+      }
+    }
+            @media (max-width: 480px) {
+          .logo-clickable {
+            top: 24px;
+            width: 80px;
+            height: 80px;
+          }
+          /* ...demais regras mobile já aplicadas... */
+        }
+    
   </style>
 </head>
 <body>
@@ -1613,7 +1731,7 @@
                 <div class="battery-fill" id="batteryFill"></div>
                 <div class="battery-percentage" id="batteryPercentage">0%</div>
               </div>
-              <div class="battery-label">Literacia<br>Energética</div>
+              <div class="battery-label">A tua Literacia<br>Energética</div>
             </div>
           </div>
 
