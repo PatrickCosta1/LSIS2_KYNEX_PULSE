@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kynex | Descubra o seu Desperdício Energético</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-main: #F5F5F7;
+      --text-primary: #1D1D1F;
+      --text-secondary: #86868B;
+      --accent-blue: #0071E3;
+      --accent-blue-hover: #0077ED;
+      --white: #FFFFFF;
+      --success-green: #34C759;
+      --shadow-soft: 0 2px 16px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 4px 24px rgba(0, 0, 0, 0.1);
+      --glow-blue: 0 8px 32px rgba(0, 113, 227, 0.15);
+      --glow-green: 0 8px 32px rgba(52, 199, 89, 0.2);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Inter", "Roboto", "Helvetica Neue", sans-serif;
+      background: linear-gradient(135deg, #F5F5F7 0%, #E8E8EA 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, #1C1C1E 0%, #0F0F10 100%);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 113, 227, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -30%;
+      left: -15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(52, 199, 89, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      padding: 24px 0;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-toggle svg {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .theme-toggle {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .theme-icon-sun,
+    body.dark-mode .theme-icon-moon {
+      display: block;
+    }
+
+    .theme-icon-moon,
+    body.dark-mode .theme-icon-sun {
+      display: none;
+    }
+
+    .logo-clickable {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 110px;
+      z-index: 10;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .logo-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      animation: shake 4s ease-in-out infinite;
+    }
+
+    .mouse-cursor {
+      position: absolute;
+      height: 28px;
+      width: auto;
+      pointer-events: none;
+      opacity: 0;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    }
+
+    .cursor-1 {
+      animation: mouseClickTopRight 15s ease-in-out infinite;
+    }
+
+    .cursor-2 {
+      animation: mouseClickLeft 15s ease-in-out 5s infinite;
+    }
+
+    .cursor-3 {
+      animation: mouseClickBottom 15s ease-in-out 10s infinite;
+    }
+
+    @keyframes mouseClickTopRight {
+      0%, 100% {
+        opacity: 0;
+        top: -80px;
+        right: -80px;
+        transform: scale(1);
+      }
+      5% {
+        opacity: 1;
+      }
+      20% {
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%) scale(1);
+      }
+      22% {
+        transform: translate(50%, -50%) scale(0.85);
+      }
+      24% {
+        transform: translate(50%, -50%) scale(1);
+      }
+      28% {
+        opacity: 1;
+      }
+      33%, 100% {
+        opacity: 0;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes mouseClickLeft {
+      0%, 100% {
+        opacity: 0;
+        top: 50%;
+        left: -80px;
+        transform: translateY(-50%) scale(1);
+      }
+      5% {
+        opacity: 1;
+      }
+      20% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      22% {
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+      24% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      28% {
+        opacity: 1;
+      }
+      33%, 100% {
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes mouseClickBottom {
+      0%, 100% {
+        opacity: 0;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%) scale(1);
+      }
+      5% {
+        opacity: 1;
+      }
+      20% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      22% {
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+      24% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      28% {
+        opacity: 1;
+      }
+      33%, 100% {
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      2% {
+        transform: translate(-3px, 2px) rotate(-2deg);
+      }
+      4% {
+        transform: translate(3px, -2px) rotate(2deg);
+      }
+      6% {
+        transform: translate(-3px, 0) rotate(-1deg);
+      }
+      8% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 220px 0 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 0;
+      color: var(--text-primary);
+      line-height: 1.2;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+      text-align: center;
+      max-width: 600px;
+      transition: color 0.3s ease;
+    }
+
+    body.dark-mode .hero h1 {
+      color: #FFFFFF;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero h1 strong {
+      background: linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .hero h1 strong {
+      background: linear-gradient(135deg, #00D4AA 0%, #00E676 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(40px) saturate(200%);
+      -webkit-backdrop-filter: blur(40px) saturate(200%);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 28px 32px 60px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12),
+                  0 4px 16px rgba(0, 0, 0, 0.08),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      position: relative;
+      margin: 0 auto;
+      max-width: 720px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .info-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4),
+                  0 8px 32px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .info-text {
+      flex: 1;
+      max-width: 320px;
+    }
+
+    .app-preview {
+      flex-shrink: 0;
+      width: 140px;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      background: transparent;
+      margin-left: auto;
+    }
+
+    .app-preview img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      transition: opacity 0.4s ease;
+      background: transparent;
+      display: block;
+    }
+
+    .info-box p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      text-align: left;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+
+    .info-box p strong {
+      color: var(--text-primary);
+    }
+
+    body.dark-mode .info-box p strong {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    body.dark-mode .info-box p {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .info-box p + p {
+      margin-top: 12px;
+    }
+
+    .formulario-btn {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      background: transparent;
+      color: #0D47A1;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: none;
+      background-image: linear-gradient(white, white), linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+
+    .formulario-btn:hover {
+      transform: translateY(-1px);
+      background-image: linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+      color: white;
+    }
+
+    body.dark-mode .formulario-btn {
+      background: linear-gradient(135deg, #00D4AA 0%, #00E676 100%);
+      background-image: linear-gradient(135deg, #00D4AA 0%, #00E676 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+      border: none;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 212, 170, 0.2);
+    }
+
+    body.dark-mode .formulario-btn:hover {
+      box-shadow: 0 6px 16px rgba(0, 212, 170, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .ver-mais-btn {
+      position: absolute;
+      bottom: 16px;
+      right: 39px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      background: transparent;
+      color: #0D47A1;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: none;
+      background-image: linear-gradient(white, white), linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+
+    .ver-mais-btn:hover {
+      transform: translateY(-1px);
+      background-image: linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+      color: white;
+    }
+
+    body.dark-mode .ver-mais-btn {
+      background: linear-gradient(135deg, #00D4AA 0%, #00E676 100%);
+      background-image: linear-gradient(135deg, #00D4AA 0%, #00E676 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+      border: none;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 212, 170, 0.2);
+    }
+
+    body.dark-mode .ver-mais-btn:hover {
+      box-shadow: 0 6px 16px rgba(0, 212, 170, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* Form Section */
+    .form-wrapper {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(40px) saturate(200%);
+      -webkit-backdrop-filter: blur(40px) saturate(200%);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      padding: 40px 32px;
+      margin: 40px 0 80px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 
+                  0 1px 2px rgba(0, 0, 0, 0.06),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark-mode .form-wrapper {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4), 
+                  0 8px 32px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .form-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    }
+
+    .form-wrapper.fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    .question-block {
+      margin-bottom: 36px;
+    }
+
+    .question-block:last-of-type {
+      margin-bottom: 28px;
+    }
+
+    .question-label {
+      display: block;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+      transition: color 0.3s ease;
+    }
+
+    body.dark-mode .question-label {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .question-label span {
+      transition: color 0.3s ease;
+    }
+
+    body.dark-mode .question-label span {
+      color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    /* Radio Buttons */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      background: rgba(245, 245, 247, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1.5px solid rgba(209, 209, 214, 0.3);
+    }
+
+    .radio-option:hover {
+      background: rgba(235, 235, 237, 0.8);
+      border-color: rgba(0, 113, 227, 0.2);
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"]:checked ~ .radio-custom {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1), 
+                  0 4px 12px rgba(0, 113, 227, 0.3);
+    }
+
+    .radio-option input[type="radio"]:checked ~ .radio-custom::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .radio-option input[type="radio"]:checked ~ .radio-label {
+      color: white;
+      font-weight: 500;
+    }
+
+    .radio-option:has(input[type="radio"]:checked) {
+      border: 1.5px solid transparent;
+      background-image: linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+    }
+
+    .radio-custom {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #D1D1D6;
+      border-radius: 50%;
+      margin-right: 12px;
+      position: relative;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .radio-custom::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 10px;
+      height: 10px;
+      background: var(--white);
+      border-radius: 50%;
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
+
+    .radio-label {
+      font-size: 15px;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    body.dark-mode .radio-label {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    body.dark-mode .radio-option {
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
+
+    body.dark-mode .radio-option:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    body.dark-mode .radio-option:has(input[type="radio"]:checked) {
+      border: 1.5px solid transparent;
+      background-image: linear-gradient(135deg, #00D4AA 0%, #00E676 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+    }
+
+    body.dark-mode .radio-option input[type="radio"]:checked ~ .radio-label {
+      color: white;
+    }
+
+    body.dark-mode .radio-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    body.dark-mode .radio-custom {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Checkboxes */
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checkbox-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      background: rgba(245, 245, 247, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1.5px solid rgba(209, 209, 214, 0.3);
+    }
+
+    .checkbox-option:hover {
+      background: rgba(235, 235, 237, 0.8);
+      border-color: rgba(0, 113, 227, 0.2);
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .checkbox-option input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .checkbox-option input[type="checkbox"]:checked ~ .checkbox-custom {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1), 
+                  0 4px 12px rgba(0, 113, 227, 0.3);
+    }
+
+    .checkbox-option input[type="checkbox"]:checked ~ .checkbox-custom::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .checkbox-option input[type="checkbox"]:checked ~ .checkbox-label {
+      color: white;
+      font-weight: 500;
+    }
+
+    .checkbox-option:has(input[type="checkbox"]:checked) {
+      border: 1.5px solid transparent;
+      background-image: linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+    }
+
+    .checkbox-custom {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #D1D1D6;
+      border-radius: 6px;
+      margin-right: 12px;
+      position: relative;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .checkbox-custom::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 5px;
+      height: 10px;
+      border: solid var(--white);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) scale(0);
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
+
+    .checkbox-label {
+      font-size: 15px;
+      color: var(--text-primary);
+      transition: color 0.3s ease;
+    }
+
+    body.dark-mode .checkbox-label {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    body.dark-mode .checkbox-option {
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
+
+    body.dark-mode .checkbox-option:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    body.dark-mode .checkbox-option:has(input[type="checkbox"]:checked) {
+      border: 1.5px solid transparent;
+      background-image: linear-gradient(135deg, #00D4AA 0%, #00E676 100%);
+      background-origin: border-box;
+      background-clip: padding-box;
+    }
+
+    body.dark-mode .checkbox-option input[type="checkbox"]:checked ~ .checkbox-label {
+      color: white;
+    }
+
+    body.dark-mode .checkbox-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    body.dark-mode .checkbox-custom {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Email Input */
+    .email-block {
+      margin-bottom: 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .email-input-wrapper {
+      flex: 1;
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 16px 18px;
+      font-size: 17px;
+      border: 1.5px solid rgba(209, 209, 214, 0.4);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      color: var(--text-primary);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    body.dark-mode .email-input {
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .email-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12),
+                  0 4px 16px rgba(0, 113, 227, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .email-input::placeholder {
+      color: #A1A1A6;
+    }
+
+    body.dark-mode .email-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Battery Literacia Energética */
+    .battery-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      min-width: 140px;
+    }
+
+    .battery-wrapper {
+      position: relative;
+      width: 80px;
+      height: 140px;
+    }
+
+    .battery-outline {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px solid;
+      border-color: #D1D1D6;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .battery-outline {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .battery-tip {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 8px;
+      background: #D1D1D6;
+      border-radius: 4px 4px 0 0;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .battery-tip {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .battery-fill {
+      position: absolute;
+      bottom: 3px;
+      left: 3px;
+      right: 3px;
+      height: 0;
+      background: linear-gradient(180deg, #00E5FF 0%, #0D47A1 100%);
+      border-radius: 5px;
+      transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body.dark-mode .battery-fill {
+      background: linear-gradient(180deg, #00E676 0%, #00D4AA 100%);
+    }
+
+    .battery-percentage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      z-index: 2;
+      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .battery-percentage.filled {
+      color: white;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark-mode .battery-percentage {
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .battery-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.3;
+      max-width: 140px;
+    }
+
+    body.dark-mode .battery-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title-wrapper h1 {
+        font-size: 32px;
+        line-height: 1.2;
+      }
+
+      .info-box {
+        padding: 24px 20px 80px;
+        gap: 20px;
+      }
+
+      .app-preview {
+        height: 400px;
+      }
+
+      .formulario-btn,
+      .ver-mais-btn {
+        font-size: 13px;
+        padding: 7px 14px;
+      }
+
+      .question-label {
+        font-size: 16px;
+      }
+
+      .radio-label,
+      .checkbox-label {
+        font-size: 14px;
+      }
+
+      .radio-option,
+      .checkbox-option {
+        padding: 12px 14px;
+      }
+
+      .cta-button {
+        font-size: 16px;
+        padding: 14px 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title-wrapper h1 {
+        font-size: 28px;
+      }
+
+      .info-box {
+        padding: 20px 16px 70px;
+      }
+
+      .app-preview {
+        height: 350px;
+      }
+
+      .email-block {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+      }
+      
+      .email-input-wrapper {
+        width: 100%;
+      }
+
+      .battery-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        min-width: auto;
+        padding: 16px 0;
+      }
+
+      .battery-wrapper {
+        width: 60px;
+        height: 110px;
+      }
+
+      .battery-fill {
+        bottom: 3px;
+        left: 3px;
+        right: 3px;
+      }
+
+      .battery-percentage {
+        font-size: 16px;
+      }
+
+      .battery-label {
+        font-size: 12px;
+        max-width: 100px;
+      }
+
+      .question-label {
+        font-size: 15px;
+        margin-bottom: 14px;
+      }
+
+      .radio-custom,
+      .checkbox-custom {
+        width: 20px;
+        height: 20px;
+      }
+
+      .formulario-btn {
+        left: 16px;
+        bottom: 12px;
+      }
+
+      .ver-mais-btn {
+        right: 16px;
+        bottom: 12px;
+      }
+    }
+
+    /* CTA Button */
+    .cta-button {
+      width: 100%;
+      padding: 18px 24px;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #005BB5 100%);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3),
+                  0 2px 4px rgba(0, 0, 0, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(135deg, var(--accent-blue-hover) 0%, #0066CC 100%);
+      box-shadow: 0 8px 28px rgba(0, 113, 227, 0.4),
+                  0 4px 12px rgba(0, 0, 0, 0.15),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .cta-button:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 60px 32px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .success-message.fade-in {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--success-green) 0%, #30D158 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: scaleIn 0.5s ease;
+      box-shadow: 0 8px 32px rgba(52, 199, 89, 0.4),
+                  0 4px 12px rgba(0, 0, 0, 0.1),
+                  inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes scaleIn {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--white);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .success-message h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .success-message p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0 60px;
+    }
+
+    footer p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .form-wrapper {
+        padding: 32px 24px;
+        margin: 30px 0 60px;
+      }
+
+      .hero {
+        padding: 40px 0 30px;
+      }
+
+      .hero-title-wrapper h1 {
+        font-size: 24px;
+      }
+
+      .cta-button {
+        font-size: 15px;
+        padding: 12px 28px;
+      }
+
+      .success-message h2 {
+        font-size: 24px;
+      }
+
+      .success-message p {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .theme-toggle {
+        width: 44px;
+        height: 44px;
+        top: 20px;
+        right: 20px;
+      }
+
+      .logo-clickable {
+        width: 90px;
+        height: 90px;
+        top: 70px;
+      }
+
+      .hero-title-wrapper h1 {
+        font-size: 22px;
+        padding: 0 10px;
+      }
+
+      .info-box {
+        padding: 16px 12px 60px;
+      }
+
+      .app-preview {
+        height: 300px;
+        margin: 0 -12px;
+      }
+
+      .form-wrapper {
+        padding: 24px 20px;
+        border-radius: 20px;
+      }
+
+      .question-label {
+        font-size: 14px;
+      }
+
+      .radio-label,
+      .checkbox-label {
+        font-size: 13px;
+      }
+
+      .radio-option,
+      .checkbox-option {
+        padding: 10px 12px;
+      }
+
+      .email-input {
+        font-size: 16px;
+        padding: 14px 16px;
+      }
+
+      .battery-wrapper {
+        width: 55px;
+        height: 100px;
+      }
+
+      .battery-percentage {
+        font-size: 14px;
+      }
+
+      .cta-button {
+        width: 100%;
+        font-size: 15px;
+        padding: 14px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <a href="home.html" class="logo-clickable">
+    <img src="logokynexpreto.png" alt="Kynex Logo" class="logo-image" />
+    <img src="rato.png" alt="cursor" class="mouse-cursor cursor-1" />
+    <img src="rato.png" alt="cursor" class="mouse-cursor cursor-2" />
+    <img src="rato.png" alt="cursor" class="mouse-cursor cursor-3" />
+  </a>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-title-wrapper">
+          <h1>A sua opinião hoje define a sua <strong>poupança</strong> de amanhã!</h1>
+        </div>
+        <div class="info-box">
+          <div class="info-text">
+            <p>Estamos a desenvolver o <strong>Kynex Pulse</strong>, uma tecnologia que ajuda as pessoas a entender melhor como a sua casa consome energia e onde é possível poupar.</p>
+            <p>Antes do lançamento, precisamos de conhecer hábitos reais de consumo para que o sistema funcione de forma mais precisa e útil. As suas respostas são totalmente anónimas e ajudam-nos a criar uma solução que poupe dinheiro de forma inteligente e justa para todos.</p>
+          </div>
+          <div class="app-preview" id="appPreview">
+            <img src="noite inicial.png" alt="Kynex App" id="appImage" />
+          </div>
+          <button class="formulario-btn" id="scrollToForm">formulário <span>↓</span></button>
+          <a href="home.html" class="ver-mais-btn">saber mais</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="form-wrapper" id="formWrapper">
+        <form id="validationForm">
+          
+          <!-- Pergunta 1 -->
+          <div class="question-block">
+            <label class="question-label">Quando olha para a sua fatura de eletricidade, sente que compreende o valor final?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q1" value="sim_analiso" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Sim, analiso tudo ao detalhe</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q1" value="nocao_geral" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Tenho uma noção geral, mas não entendo as taxas e detalhes</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q1" value="confusa" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Não, pago por necessidade mas acho a fatura confusa</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 2 -->
+          <div class="question-block">
+            <label class="question-label">Se lhe perguntassem agora qual é o aparelho que mais gastou em sua casa este mês, saberia responder?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q2" value="sim_certeza" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Sim, com certeza</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q2" value="suspeitas" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Tenho suspeitas, mas sem certeza</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q2" value="nao_ideia" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Não faço a mínima ideia</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 3 -->
+          <div class="question-block">
+            <label class="question-label">Qual destas situações descreve melhor a tecnologia na sua casa?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q3" value="analogica" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">"Analógica": Não tenho dispositivos inteligentes</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q3" value="iniciante" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">"Iniciante": Tenho algumas lâmpadas ou assistentes (Alexa/Google)</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q3" value="smart_home" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">"Smart Home": Já tenho vários dispositivos conectados</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 4 -->
+          <div class="question-block">
+            <label class="question-label">Com que frequência sai de casa e fica na dúvida (“Será que deixei o aquecedor/ferro ligado?”)?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q4" value="nunca" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Nunca, verifico tudo</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q4" value="raramente" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Raramente</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q4" value="frequentemente" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Frequentemente / Já tive de voltar atrás para confirmar</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 5 -->
+          <div class="question-block">
+            <label class="question-label">Para ter acesso aos seus dados em tempo real (ao segundo), estaria disposto a instalar um pequeno medidor no seu quadro elétrico (instalação única)?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q5" value="sim_beneficios" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Sim, se trouxer benefícios claros de poupança</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q5" value="talvez_simples" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Talvez, se a instalação for simples ou incluída</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q5" value="nao_mexer" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Não, não gosto de mexer no quadro elétrico</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 6 -->
+          <div class="question-block">
+            <label class="question-label">Tem familiares idosos a viver sozinhos? Como avalia uma funcionalidade que o alerte se a rotina elétrica deles mudar (ex: muitas horas de inatividade)?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q6" value="nao_aplica" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Não se aplica</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q6" value="interessante" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Interessante, mas não pagaria extra</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q6" value="muito_valioso" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Muito valioso, pagaria por essa segurança/tranquilidade</span>
+              </label>
+            </div>
+          </div>
+
+          
+
+          <!-- Pergunta 7 -->
+          <div class="question-block">
+            <label class="question-label">Quanto acha que gasta por mês em “desperdício invisível” (luzes esquecidas, standby, máquinas na hora errada)?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q7" value="menos_5" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Menos de 5€</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q7" value="5_15" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Entre 5€ e 15€</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q7" value="mais_20" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Mais de 20€</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 8 -->
+          <div class="question-block">
+            <label class="question-label">Se uma solução (App + Equipamento) lhe garantisse recuperar esse desperdício e automatizar a casa, consideraria uma subscrição de 2,99€/mês?</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="q8" value="nao_gratuitas" required />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Não, procuro apenas soluções gratuitas</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q8" value="talvez" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Talvez, preciso de ver para crer</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q8" value="sim_justo" />
+                <span class="radio-custom"></span>
+                <span class="radio-label">Sim, 3€ é um valor justo para a poupança prometida</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 9 -->
+          <div class="question-block">
+            <label class="question-label">Selecione as 3 funcionalidades que mais valorizaria:</label>
+            <div class="checkbox-group">
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="desagregacao" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Saber qual o eletrodoméstico que gasta mais (Desagregação)</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="alertas_seguranca" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Alertas de Segurança (Equipamentos esquecidos/Idosos)</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="desligar_distancia" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Desligar tomadas à distância pelo telemóvel</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="automatizar_estores" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Automatizar estores para aproveitar o sol/calor</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="previsao_fatura" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Previsão do valor da fatura antes de ela chegar</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="comparar_consumo" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Comparar o meu consumo com casas semelhantes</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="tarifarios_baratos" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Recomendações automáticas de tarifários mais baratos</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="q9" value="sugestoes_poupanca" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label">Receber sugestões de poupança personalizadas com base no seu consumo</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Email (Pergunta 10) -->
+          <div class="email-block">
+            <div class="email-input-wrapper">
+              <label class="question-label">Estamos a selecionar um grupo restrito para testar a versão Beta da Kynex gratuitamente. Poupe connosco. Deixe aqui o seu e-mail.</label>
+
+              <input 
+                type="email" 
+                name="email" 
+                class="email-input" 
+                placeholder="seu@email.com" 
+                required 
+                aria-label="Email"
+              />
+            </div>
+            
+            <!-- Battery Literacia Energética -->
+            <div class="battery-container">
+              <div class="battery-wrapper">
+                <div class="battery-tip"></div>
+                <div class="battery-outline"></div>
+                <div class="battery-fill" id="batteryFill"></div>
+                <div class="battery-percentage" id="batteryPercentage">0%</div>
+              </div>
+              <div class="battery-label">Literacia<br>Energética</div>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <button type="submit" class="cta-button">Quero começar a poupar</button>
+        </form>
+      </div>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2>Obrigado!</h2>
+        <p>Os seus dados foram registados com sucesso. Será um dos primeiros a receber o acesso à versão Beta da Kynex Pulse.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Kynex Systems. Moving Forward.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const logoImage = document.querySelector('.logo-image');
+
+    function updateLogo() {
+      if (body.classList.contains('dark-mode')) {
+        logoImage.src = 'logokynexbranco.png';
+      } else {
+        logoImage.src = 'logokynexpreto.png';
+      }
+    }
+
+    themeToggle.addEventListener('click', function() {
+      body.classList.toggle('dark-mode');
+      updateLogo();
+      localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-mode');
+    }
+    updateLogo();
+
+    // Scroll to form button
+    const scrollToFormBtn = document.getElementById('scrollToForm');
+    const firstQuestion = document.querySelector('.question-block');
+
+    scrollToFormBtn.addEventListener('click', function() {
+      firstQuestion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // App preview toggle
+    const appPreview = document.getElementById('appPreview');
+    const appImage = document.getElementById('appImage');
+    let isInitial = true;
+
+    appPreview.addEventListener('click', function() {
+      appImage.style.opacity = '0';
+      
+      setTimeout(() => {
+        if (isInitial) {
+          appImage.src = 'noite grafico.png';
+          isInitial = false;
+        } else {
+          appImage.src = 'noite inicial.png';
+          isInitial = true;
+        }
+        appImage.style.opacity = '1';
+      }, 200);
+    });
+
+    // Form handling
+    const form = document.getElementById('validationForm');
+    const formWrapper = document.getElementById('formWrapper');
+    const successMessage = document.getElementById('successMessage');
+
+    // Limit checkboxes to 3 selections for question 9
+    const q9Checkboxes = document.querySelectorAll('input[name="q9"]');
+    q9Checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const checkedCount = document.querySelectorAll('input[name="q9"]:checked').length;
+        if (checkedCount > 3) {
+          this.checked = false;
+          alert('Por favor, selecione no máximo 3 opções.');
+        }
+        updateBatteryLevel();
+      });
+    });
+
+    // Battery Literacia Energética Calculator
+    function calculateLiteracyScore() {
+      let score = 0;
+      let maxScore = 100;
+
+      // Pergunta 1: Compreensão da fatura (20 pontos)
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      if (q1) {
+        if (q1.value === 'sim_analiso') score += 20;
+        else if (q1.value === 'nocao_geral') score += 10;
+        else score += 0;
+      }
+
+      // Pergunta 2: Conhecimento do aparelho que mais gasta (20 pontos)
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      if (q2) {
+        if (q2.value === 'sim_certeza') score += 20;
+        else if (q2.value === 'suspeitas') score += 10;
+        else score += 0;
+      }
+
+      // Pergunta 3: Nível tecnológico da casa (15 pontos)
+      const q3 = document.querySelector('input[name="q3"]:checked');
+      if (q3) {
+        if (q3.value === 'smart_home') score += 15;
+        else if (q3.value === 'iniciante') score += 8;
+        else score += 3;
+      }
+
+      // Pergunta 4: NÃO PONTUA (0 pontos)
+      // Intencionalmente sem pontuação
+
+      // Pergunta 5: NÃO PONTUA (0 pontos)
+      // Intencionalmente sem pontuação
+
+      // Pergunta 6: NÃO PONTUA (0 pontos)
+      // Intencionalmente sem pontuação
+
+      // Pergunta 7: Estimativa de desperdício (20 pontos)
+      const q7 = document.querySelector('input[name="q7"]:checked');
+      if (q7) {
+        if (q7.value === 'mais_20') score += 20; // Consciência de desperdício alto
+        else if (q7.value === '5_15') score += 15;
+        else score += 8;
+      }
+
+      // Pergunta 8: Disposição para investir (15 pontos)
+      const q8 = document.querySelector('input[name="q8"]:checked');
+      if (q8) {
+        if (q8.value === 'sim_justo') score += 15;
+        else if (q8.value === 'talvez') score += 8;
+        else score += 3;
+      }
+
+      // Pergunta 9: Conhecimento de funcionalidades (10 pontos)
+      const q9Checked = document.querySelectorAll('input[name="q9"]:checked');
+      const q9Count = q9Checked.length;
+      // Bonus: funcionalidades mais técnicas
+      let technicalBonus = 0;
+      q9Checked.forEach(checkbox => {
+        if (['desagregacao', 'alertas_seguranca', 'tarifarios_baratos'].includes(checkbox.value)) {
+          technicalBonus += 1;
+        }
+      });
+      score += Math.min(10, q9Count * 2 + technicalBonus);
+
+      // Converte para percentagem (máximo de 100, mas difícil de alcançar)
+      const percentage = Math.min(100, Math.round((score / maxScore) * 100));
+      return percentage;
+    }
+
+    function updateBatteryLevel() {
+      const percentage = calculateLiteracyScore();
+      const batteryFill = document.getElementById('batteryFill');
+      const batteryPercentage = document.getElementById('batteryPercentage');
+      
+      const fillHeight = (percentage / 100) * 134; // 134px é a altura máxima (140px - 6px de padding)
+      batteryFill.style.height = fillHeight + 'px';
+      batteryPercentage.textContent = percentage + '%';
+      
+      // Mudar cor do texto quando a pilha preenche mais de 50%
+      if (percentage > 50) {
+        batteryPercentage.classList.add('filled');
+      } else {
+        batteryPercentage.classList.remove('filled');
+      }
+    }
+
+    // Atualizar bateria quando qualquer radio button for alterado
+    const allRadios = document.querySelectorAll('input[type="radio"]');
+    allRadios.forEach(radio => {
+      radio.addEventListener('change', updateBatteryLevel);
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get form data
+      const formData = new FormData(form);
+      const data = {
+        q1: formData.get('q1'),
+        q2: formData.get('q2'),
+        q3: formData.get('q3'),
+        q4: formData.get('q4'),
+        q5: formData.get('q5'),
+        q6: formData.get('q6'),
+        q7: formData.get('q7'),
+        q8: formData.get('q8'),
+        q9: formData.getAll('q9'),
+        email: formData.get('email')
+      };
+
+      // Validate email
+      const email = formData.get('email');
+      if (!email || !email.includes('@')) {
+        alert('Por favor, insira um email válido.');
+        return;
+      }
+
+      // Log data (in production, send to backend/API)
+      console.log('Form Data:', data);
+
+      // Simulate API call delay
+      setTimeout(() => {
+        // Fade out form
+        formWrapper.classList.add('fade-out');
+
+        // After fade out, show success message
+        setTimeout(() => {
+          formWrapper.style.display = 'none';
+          successMessage.classList.add('fade-in');
+        }, 400);
+      }, 300);
+
+      // In production, you would send this data to your backend:
+      // fetch('/api/stealth-leads', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(data)
+      // });
+    });
+  </script>
+</body>
+</html>
