@@ -1822,22 +1822,23 @@
         body: new URLSearchParams(formData).toString()
       })
       .then(() => {
-        document.getElementById('popupOverlay').style.display = 'flex';
+        const popup = document.getElementById('popupOverlay');
+        popup.style.display = 'flex';
         form.reset();
         updateBatteryLevel();
+        // Atribui evento ao botão de fechar sempre que o popup aparece
+        const closeBtn = document.getElementById('closePopupBtn');
+        if (closeBtn) {
+          closeBtn.onclick = function() {
+            popup.style.display = 'none';
+          };
+        }
       })
       .catch(() => alert('Ocorreu um erro ao enviar. Tente novamente.'));
     });
 
     // Fechar popup
-    document.addEventListener('DOMContentLoaded', function() {
-      const closeBtn = document.getElementById('closePopupBtn');
-      if (closeBtn) {
-        closeBtn.onclick = function() {
-          document.getElementById('popupOverlay').style.display = 'none';
-        };
-      }
-    });
+    // Removido: evento de fechar popup agora é atribuído após submit
 
   </script>
 </body>
