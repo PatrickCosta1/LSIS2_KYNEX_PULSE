@@ -800,8 +800,8 @@ main {
 
 .hero-logo {
   margin-bottom: -80px;
-  margin-top: -200px;
-  margin-left: 80px;
+  margin-top: -90px;
+  margin-left: 190px;
   position: relative;
   z-index: 2;
 }
@@ -813,7 +813,7 @@ main {
 
 .hero-message {
   margin-top: 20px;
-  margin-left: 80px;
+  margin-left: 190px;
   position: relative;
   z-index: 1;
 }
