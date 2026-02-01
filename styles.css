@@ -801,6 +801,7 @@ main {
 .hero-logo {
   margin-bottom: -80px;
   margin-top: -200px;
+  margin-left: 80px;
   position: relative;
   z-index: 2;
 }
@@ -812,6 +813,7 @@ main {
 
 .hero-message {
   margin-top: 20px;
+  margin-left: 80px;
   position: relative;
   z-index: 1;
 }
@@ -819,7 +821,6 @@ main {
 .hero-message-img {
   height: clamp(150px, 25vw, 300px);
   width: auto;
-  transform: translateX(-30px);
 }
 
 .hero-copy h1 {
@@ -1494,9 +1495,6 @@ main {
   border-radius: 50px;
   border: 1.5px solid rgba(0, 212, 170, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease 0.3s, visibility 0.5s ease 0.3s;
 }
 
 .toggle-switch.visible {
@@ -1633,19 +1631,7 @@ main {
 }
 
 .mockup-blur-overlay {
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(20, 20, 20, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  opacity: 1;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  visibility: visible;
-  border-radius: 40px;
+  display: none;
 }
 
 .mockup-blur-overlay.hidden {
