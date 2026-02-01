@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 // Substitua pela sua string de conexão do Atlas
 const MONGO_URI = 'mongodb+srv://dbuser:sinf2abmp@sinf2.ymbvmi4.mongodb.net/';
 
-mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(MONGO_URI);
 
 const EmailSchema = new mongoose.Schema({
   email: { type: String, required: true },
