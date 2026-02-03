@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYNEX PULSE | Digital Twin Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="simulation.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="nav">
+        <div class="logo-wrap">
+            <a href="home.html">
+                <img src="../logokynex.png" alt="Logotipo Kynex" class="logo" />
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="home.html#home">Home</a>
+            <a href="home.html#newsletter">Newsletter</a>
+            <a href="home.html#about">Sobre</a>
+            <a href="home.html#contact">Contacto</a>
+        </div>
+        <div class="nav-actions">
+            <a href="simulation.html" class="btn solid simulation-btn-nav">KYNEX SIMULATION</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="sim-main">
+        <!-- Left Model - Heater -->
+        <div class="model-section">
+            <div class="model-box">
+                <canvas id="heaterCanvas"></canvas>
+            </div>
+            <h2 class="model-title">Aquecedor</h2>
+            
+            <!-- Heater Info Card -->
+            <div class="info-card">
+                <div class="info-header">
+                    <span class="info-label">ESTADO:</span>
+                    <div class="status-toggle">
+                        <span class="info-status active" id="heaterStatus">ON</span>
+                        <button class="toggle-btn" id="heaterToggle">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-consumption">
+                    <span class="info-label">CONSUMO</span>
+                </div>
+                <div class="period-buttons">
+                    <button class="period-btn active" data-device="heater" data-period="live">LIVE</button>
+                    <button class="period-btn" data-device="heater" data-period="24h">24H</button>
+                    <button class="period-btn" data-device="heater" data-period="mensal">MENSAL</button>
+                </div>
+                <div class="consumption-value" id="heaterConsumption">0,00 €</div>
+                <div class="consumption-note" id="heaterNote"></div>
+            </div>
+        </div>
+        
+        <!-- Right Model - Lamp -->
+        <div class="model-section">
+            <div class="model-box">
+                <canvas id="lampCanvas"></canvas>
+            </div>
+            <h2 class="model-title">Candeeiro</h2>
+            
+            <!-- Lamp Info Card -->
+            <div class="info-card">
+                <div class="info-header">
+                    <span class="info-label">ESTADO:</span>
+                    <div class="status-toggle">
+                        <span class="info-status active" id="lampStatus">ON</span>
+                        <button class="toggle-btn" id="lampToggle">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-consumption">
+                    <span class="info-label">CONSUMO</span>
+                </div>
+                <div class="period-buttons">
+                    <button class="period-btn active" data-device="lamp" data-period="live">LIVE</button>
+                    <button class="period-btn" data-device="lamp" data-period="mensal">MENSAL</button>
+                    <button class="period-btn" data-device="lamp" data-period="anual">ANUAL</button>
+                </div>
+                <div class="consumption-value" id="lampConsumption">0,00 €</div>
+                <div class="consumption-note" id="lampNote"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
+    <script src="room3d.js"></script>
+    <script src="simulation.js"></script>
+</body>
+</html>
