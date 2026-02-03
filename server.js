@@ -25,7 +25,6 @@ const Email = mongoose.model('Email', EmailSchema);
 
 app.use(express.json());
 app.use(express.static(__dirname));
-
 const mqttConfig = {
   broker: process.env.SHELLY_MQTT_BROKER || '3885b212bedd4eebb03ddfd6e5eff3cc.s1.eu.hivemq.cloud',
   port: Number(process.env.SHELLY_MQTT_PORT || 8883),
@@ -175,6 +174,8 @@ mqttClient.on('error', (err) => {
 });
 
 app.get('/shelly-status', (req, res) => {
+  const allowedOrigin = process.env.FRONTEND_ORIGIN || '*';
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');

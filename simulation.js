@@ -163,7 +163,20 @@ applyDeviceState('heater', null);
 applyDeviceState('lamp', null);
 
 // MQTT status stream (SSE)
-const statusStream = new EventSource('/shelly-status');
+function resolveBackendUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const paramUrl = params.get('backend');
+
+    if (paramUrl) {
+        localStorage.setItem('kynexBackendUrl', paramUrl);
+        return paramUrl;
+    }
+
+    return localStorage.getItem('kynexBackendUrl') || '';
+}
+
+const backendUrl = resolveBackendUrl();
+const statusStream = new EventSource(`${backendUrl}/shelly-status`);
 statusStream.addEventListener('message', (event) => {
     try {
         const data = JSON.parse(event.data);
