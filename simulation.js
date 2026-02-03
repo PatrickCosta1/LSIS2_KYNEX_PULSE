@@ -18,12 +18,12 @@ const LAMP_RATES = {
 // State
 const state = {
     heater: {
-        on: true,
+        on: null,
         period: 'live',
         liveValue: 0
     },
     lamp: {
-        on: true,
+        on: null,
         period: 'live',
         liveValue: 0
     }
@@ -31,65 +31,45 @@ const state = {
 
 // Elements
 const heaterStatus = document.getElementById('heaterStatus');
-const heaterToggle = document.getElementById('heaterToggle');
 const heaterConsumption = document.getElementById('heaterConsumption');
+const heaterNote = document.getElementById('heaterNote');
 
 const lampStatus = document.getElementById('lampStatus');
-const lampToggle = document.getElementById('lampToggle');
 const lampConsumption = document.getElementById('lampConsumption');
+const lampNote = document.getElementById('lampNote');
 
-// Initialize toggle states
-heaterToggle.classList.add('active');
-lampToggle.classList.add('active');
+function applyDeviceState(device, isOn) {
+    const statusElement = device === 'heater' ? heaterStatus : lampStatus;
+    const deviceState = state[device];
 
-// Toggle functions
-heaterToggle.addEventListener('click', () => {
-    state.heater.on = !state.heater.on;
-    if (state.heater.on) {
-        heaterToggle.classList.add('active');
-        heaterStatus.textContent = 'ON';
-        heaterStatus.classList.add('active');
-        heaterStatus.classList.remove('inactive');
+    deviceState.on = isOn;
+
+    if (isOn === true) {
+        statusElement.textContent = 'ON';
+        statusElement.classList.add('active');
+        statusElement.classList.remove('inactive');
+    } else if (isOn === false) {
+        statusElement.textContent = 'OFF';
+        statusElement.classList.remove('active');
+        statusElement.classList.add('inactive');
+        deviceState.liveValue = 0;
     } else {
-        heaterToggle.classList.remove('active');
-        heaterStatus.textContent = 'OFF';
-        heaterStatus.classList.remove('active');
-        heaterStatus.classList.add('inactive');
-        state.heater.liveValue = 0;
+        statusElement.textContent = 'AGUARDANDO';
+        statusElement.classList.remove('active');
+        statusElement.classList.remove('inactive');
     }
-    
-    // Controlar glows do modelo 3D
-    if (window.setHeaterState) {
-        window.setHeaterState(state.heater.on);
-    }
-    
-    updateConsumption('heater');
-    updateBackground();
-});
 
-lampToggle.addEventListener('click', () => {
-    state.lamp.on = !state.lamp.on;
-    if (state.lamp.on) {
-        lampToggle.classList.add('active');
-        lampStatus.textContent = 'ON';
-        lampStatus.classList.add('active');
-        lampStatus.classList.remove('inactive');
-    } else {
-        lampToggle.classList.remove('active');
-        lampStatus.textContent = 'OFF';
-        lampStatus.classList.remove('active');
-        lampStatus.classList.add('inactive');
-        state.lamp.liveValue = 0;
-    }
-    
     // Controlar glows do modelo 3D
-    if (window.setLampState) {
-        window.setLampState(state.lamp.on);
+    if (device === 'heater' && window.setHeaterState && typeof isOn === 'boolean') {
+        window.setHeaterState(isOn);
     }
-    
-    updateConsumption('lamp');
+    if (device === 'lamp' && window.setLampState && typeof isOn === 'boolean') {
+        window.setLampState(isOn);
+    }
+
+    updateConsumption(device);
     updateBackground();
-});
+}
 
 // Period button handling
 document.querySelectorAll('.period-btn').forEach(btn => {
@@ -115,6 +95,13 @@ function updateConsumption(device) {
     const element = device === 'heater' ? heaterConsumption : lampConsumption;
     const noteElement = device === 'heater' ? heaterNote : lampNote;
     const deviceState = state[device];
+
+    if (deviceState.on === null) {
+        element.textContent = 'Aguardando estado...';
+        element.style.fontSize = '1.2rem';
+        noteElement.textContent = '';
+        return;
+    }
     
     if (!deviceState.on) {
         element.textContent = 'Kynex Pulse: Desperdício Zero';
@@ -144,7 +131,7 @@ function updateConsumption(device) {
 
 // Update background based on device states
 function updateBackground() {
-    const bothOff = !state.heater.on && !state.lamp.on;
+    const bothOff = state.heater.on === false && state.lamp.on === false;
     if (bothOff) {
         document.body.style.backgroundImage = "url('fundo1.png')";
     } else {
@@ -155,7 +142,7 @@ function updateBackground() {
 // Live counter updates every second
 setInterval(() => {
     // Update heater - sempre incrementa se estiver ON
-    if (state.heater.on) {
+    if (state.heater.on === true) {
         state.heater.liveValue += HEATER_RATES.live;
         if (state.heater.period === 'live') {
             updateConsumption('heater');
@@ -163,7 +150,7 @@ setInterval(() => {
     }
     
     // Update lamp - sempre incrementa se estiver ON
-    if (state.lamp.on) {
+    if (state.lamp.on === true) {
         state.lamp.liveValue += LAMP_RATES.live;
         if (state.lamp.period === 'live') {
             updateConsumption('lamp');
@@ -172,5 +159,23 @@ setInterval(() => {
 }, 1000);
 
 // Initialize display
-updateConsumption('heater');
-updateConsumption('lamp');
+applyDeviceState('heater', null);
+applyDeviceState('lamp', null);
+
+// MQTT status stream (SSE)
+const statusStream = new EventSource('/shelly-status');
+
+statusStream.addEventListener('message', (event) => {
+    try {
+        const data = JSON.parse(event.data);
+        if (data && data.device && typeof data.on === 'boolean') {
+            applyDeviceState(data.device, data.on);
+        }
+    } catch (err) {
+        console.warn('Estado MQTT inválido:', err);
+    }
+});
+
+statusStream.addEventListener('error', () => {
+    console.warn('Ligação ao estado MQTT perdida.');
+});

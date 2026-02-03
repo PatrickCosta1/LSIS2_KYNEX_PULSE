@@ -295,37 +295,6 @@ body {
     color: #ff4b4b;
 }
 
-.toggle-btn {
-    width: 50px;
-    height: 28px;
-    background: rgba(255, 75, 75, 0.3);
-    border: none;
-    border-radius: 14px;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.toggle-btn.active {
-    background: rgba(0, 255, 136, 0.3);
-}
-
-.toggle-slider {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    background: #ff4b4b;
-    border-radius: 50%;
-    top: 3px;
-    left: 3px;
-    transition: all 0.3s ease;
-}
-
-.toggle-btn.active .toggle-slider {
-    background: #00ff88;
-    left: 25px;
-}
-
 .info-consumption {
     margin-bottom: 20px;
 }
