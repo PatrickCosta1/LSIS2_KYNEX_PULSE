@@ -164,7 +164,6 @@ applyDeviceState('lamp', null);
 
 // MQTT status stream (SSE)
 const statusStream = new EventSource('/shelly-status');
-
 statusStream.addEventListener('message', (event) => {
     try {
         const data = JSON.parse(event.data);
